@@ -11,6 +11,7 @@ static volatile int controle;
 
 void espera(void);
 void sinal(void);
+void gera_senha(char senha[tamsenha]);
 
 int main(void)
 {
@@ -33,6 +34,14 @@ int main(void)
         printf("11a - Erro na criacao do ponteiro para memoria.\n");
         exit(1);
     }
+
+    pm1 = mc;
+    pm2 = mc + tamsenha;
+
+    srand(time(NULL));   
+    gera_senha(senha);
+    printf("%s\n", senha);
+
     return 0;
 }
 
@@ -47,4 +56,28 @@ void sinal(void)
 {
     controle = 0;
     signal(SIGUSR1, (void *) sinal);
+}
+
+void gera_senha(char senha[tamsenha])
+{
+    int i=0;
+    for(; i<tamsenha-1; i++)
+    {
+        switch(rand()%4)
+        {
+            case 0:
+                senha[i] = 'R';
+                break;
+            case 1:
+                senha[i] = 'G';
+                break;
+            case 2:
+                senha[i] = 'Y';
+                break;
+            case 3:
+                senha[i] = 'B';
+                break;
+        }
+    }
+    senha[tamsenha-1] = '\0';
 }
