@@ -1,0 +1,13 @@
+ex11a.c: In function ‘main’:
+ex11a.c:20:9: warning: unused variable ‘pid_11b’ [-Wunused-variable]
+     int pid_11b;
+         ^
+ex11a.c:19:48: warning: unused variable ‘senha’ [-Wunused-variable]
+     char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+                                                ^
+ex11a.c:19:36: warning: unused variable ‘pm2’ [-Wunused-variable]
+     char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+                                    ^
+ex11a.c:19:23: warning: unused variable ‘pm1’ [-Wunused-variable]
+     char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+                       ^
