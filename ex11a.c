@@ -12,12 +12,14 @@ static volatile int controle;
 void espera(void);
 void sinal(void);
 void gera_senha(char senha[tamsenha]);
+int brancos(char senha[tamsenha], char tenta[tamsenha]);
+int pretos(char senha[tamsenha], char tenta[tamsenha]);
 
 int main(void)
 {
     key_t chave;
     int mcid;
-    char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+    char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
     int pid_11b;
     if((chave = ftok("senha.c", (int)rand()%256)) == -1)
     {
@@ -35,12 +37,13 @@ int main(void)
         exit(1);
     }
 
-    pm1 = mc;
-    pm2 = mc + tamsenha;
+    pmp = mc;
+    pmr = mc + tamsenha;
 
     srand(time(NULL));   
     gera_senha(senha);
-    printf("%s\n", senha);
+
+
 
     return 0;
 }
@@ -81,3 +84,26 @@ void gera_senha(char senha[tamsenha])
     }
     senha[tamsenha-1] = '\0';
 }
+
+int brancos(char senha[tamsenha], char tenta[tamsenha])
+{
+    int i = 0, cont = 0;
+    for(; i<tamsenha-1; i++)
+        if(senha[i] == tenta[i])
+            cont++;
+    return cont;
+}
+
+int pretos(char senha[tamsenha], char tenta[tamsenha])
+{
+    int i=0, j=0, cont=0, aux[tamsenha]={0};
+    for(; i<tamsenha-1; i++)
+        for(; j<tamsenha-1; j++)
+            if(senha[i] == tenta[j] && !aux[j])
+            {
+                cont++;
+                aux[j] = 1;
+            }
+    return cont;
+}
+

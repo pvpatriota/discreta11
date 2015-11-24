@@ -1,10 +1,10 @@
 ex11a.c: In function ‘main’:
-ex11a.c:21:9: warning: unused variable ‘pid_11b’ [-Wunused-variable]
+ex11a.c:23:9: warning: unused variable ‘pid_11b’ [-Wunused-variable]
      int pid_11b;
          ^
-ex11a.c:20:36: warning: variable ‘pm2’ set but not used [-Wunused-but-set-variable]
-     char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+ex11a.c:22:36: warning: variable ‘pmr’ set but not used [-Wunused-but-set-variable]
+     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
                                     ^
-ex11a.c:20:23: warning: variable ‘pm1’ set but not used [-Wunused-but-set-variable]
-     char *mc = NULL, *pm1 = NULL, *pm2 = NULL, senha[tamsenha];
+ex11a.c:22:23: warning: variable ‘pmp’ set but not used [-Wunused-but-set-variable]
+     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
                        ^
