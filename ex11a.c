@@ -4,6 +4,7 @@
 #include <time.h>
 #include <sys/shm.h>
 #include <signal.h>
+#include <string.h>
 
 #define tamsenha 5
 
@@ -14,13 +15,13 @@ void sinal(void);
 void gera_senha(char senha[tamsenha]);
 int brancos(char senha[tamsenha], char tenta[tamsenha]);
 int pretos(char senha[tamsenha], char tenta[tamsenha]);
-
+void resposta(int bra, int pre, char resp[tamsenha]);
 int main(void)
 {
     key_t chave;
     int mcid;
     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
-    int pid_11b;
+    int pid_11b, cont=0, nb, np;
     if((chave = ftok("senha.c", (int)rand()%256)) == -1)
     {
         printf("11a - Erro na geracao da chave.\n");
@@ -43,7 +44,27 @@ int main(void)
     srand(time(NULL));   
     gera_senha(senha);
 
+    printf("Digite o ID do processo do ex11b.x");
+    scanf("%d", &pid_11b);
+    signal(SIGUSR1, (void *) sinal);
+    
+    printf("11a - O jogo ira comecar, serao dadas 15 tentativas. Boa sorte.\n");
 
+    while(strcmp(pmr, "BBBB") && cont<15)
+    {
+        kill(pid_11b, SIGUSR1);
+        espera();
+        nb = brancos(senha, pmp);
+        np = pretos(senha, pmp);
+        resposta(nb, np, pmr);
+        printf("11a - Nesta tentativa voce conseguiu %d brancos e %d pretos\n", nb, np);
+    }
+    kill(pid_11b, SIGUSR1);
+    if(strcmp(pmr, "BBBB"))
+        printf("11a - Parabens, voce conseguiu acertar a senha.\n");
+    else
+        printf("11a - Infelizmente a senha nao foi descoberta.\n");
+    printf("11a - A senha era: %s.\n", senha);
 
     return 0;
 }
@@ -53,6 +74,7 @@ void espera(void)
     printf("11a - entrando em estado de espera.\n");
     while(controle)
         sleep(1);
+    controle = 1;
 }
 
 void sinal(void)
@@ -107,3 +129,17 @@ int pretos(char senha[tamsenha], char tenta[tamsenha])
     return cont;
 }
 
+void resposta(int bra, int pre, char resp[tamsenha])
+{
+    int i=0, aux = 0;
+    for(; i<bra ; i++)
+    {
+        resp[i] = 'B';
+        aux++;
+    }
+    for(i=0; i<pre; i++)
+    {
+        resp[aux] = 'P';
+        aux++;
+    }
+}
