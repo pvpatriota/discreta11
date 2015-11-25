@@ -15,7 +15,7 @@ typedef struct jogoant /*struct para auxiliar a IA*/
     char ant[tamsenha];
     char resultant[tamsenha];
     int nb, np, a, b, jogada, jogocerteza[tamsenha];
-    
+
 }jogoant;
 
 void espera(void);
@@ -24,6 +24,7 @@ void troca_cor(char senha[tamsenha], int a);
 void inverte_posicao(char senha[tamsenha], int a, int b);
 int brancos(char senha[tamsenha]);
 int pretos(char senha[tamsenha]);
+void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1);
 
 int main(void)
 {
@@ -122,4 +123,149 @@ int pretos(char senha[tamsenha]) /*Funcao para contar a quantidade de pretos*/
         if(senha[i] == 'B')
             cont++;
     return cont;
+}
+
+void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1)
+{
+    int aux;
+    m1.nb = brancos(m1.ant);
+    m1.np = pretos(m1.ant);
+    if(m1.jogada != 1)
+    {
+        if(m1.nb > brancos(pmr))
+        {
+            if(m1.np > pretos(pmr))
+            {
+                /*ocorrencia impossivel para este codigo*/
+            }
+            else if(m1.np < pretos(pmr))
+            {
+                if(m1.a == m1.b)
+                {
+                    m1.jogocerteza[m1.a] = 1;
+                    while(m1.a == m1.b)
+                    {
+                        m1.a = rand()%4;
+                        while(m1.jogocerteza[m1.a])
+                            m1.a = rand()%4;
+                        m1.b = m1.a;
+                        troca_cor(senha, m1.a);
+                    }
+                    else
+                    {
+                        m1.b = m1.a;
+                        troca_cor(senha, m1.a);
+                    }
+                }
+                else
+                {
+                    while(m1.jogocerteza[m1.a])
+                        m1.a = rand()%4;
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a);
+                }
+            }
+            else
+            {
+                if(m1.a == m1.b)
+                {
+                    m1.jogocerteza[m1.a] = 1;
+                    while(m1.a == m1.b && m1.jogocerteza[m1.a])
+                        m1.a = rand()%4;
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a)
+                }
+                else
+                {
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a);
+                }
+            }
+        }
+        else if(m1.nb < brancos(pmr))
+        {
+            if(m1.np > pretos(pmr))
+            {
+                senha = m1.ant;
+                if(m1.a == m1.b)
+                {
+                    m1.jogocerteza[m1.a] = 1;
+                    while(m1.a == m1.b && m1.jogocerteza[m1.a])
+                        m1.a = rand()%4;
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a);
+                }
+                else
+                {
+                    /*ocorrencia impossivel para este codigo*/
+                }
+            }
+            else if(m1.np < pretos(pmr))
+            {
+                senha = m1.ant;
+                if(m1.a == m1.b)
+                {
+                    m1.jogocerteza[m1.a] = 1;
+                    while(m1.a == m1.b && m1.jogocerteza[m1.a])
+                        m1.a = rand()%4;
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a);
+                }
+                else
+                {
+                    /*Ocorrencia impossivel para o codigo atual*/
+                }
+            }
+            else
+            {
+                m1.jogocerteza[m1.a] = 1;
+                while(m1.a == m1.b && m1.jogocerteza[m1.a])
+                    m1.a = rand()%4;
+                m1.b = m1.a;
+                troca_cor(senha, m1.a);
+            }
+        }
+        else
+        {
+            if(m1.np > pretos(pmr))
+            {
+                if(m1.a == m1.b)
+                {
+                    while(m1.b != m1.a && m1.jogocerteza[m1.b])
+                        m1.b = rand()%4;
+                    inverte_posicao(senha, m1.a, m1.b)
+                }
+                else
+                {
+                    /*Ocorrencia impossivel para o codigo atual*/
+                }
+            }
+            else if(m1.np < pretos(pmr))
+            {
+                if(m1.a == m1.b)
+                {
+                    senha = m1.ant;
+                    while(m1.a == m1.b && m1.jogocerteza[m1.a])
+                        m1.a = rand()%4;
+                    m1.b = m1.a;
+                    troca_cor(senha, m1.a);
+                }
+                else
+                {
+                    /*Ocorrencia impossivel para o codigo atual*/
+                }
+            }
+            else
+            {
+                while(m1.jogocerteza[m1.a])
+                    m1.a = rand()%4;
+                m1.b = m1.a;
+                troca_cor(senha, m1.a);
+            }
+        }
+    }
+    else
+        senha = "RGBY";
+    m1.ant = senha;
+    m1.resultant = pmr;
 }
