@@ -57,3 +57,17 @@ int main(void)
 
     return 0;
 }
+
+void espera(void) /*Funcao que espera a resposta do programa a*/
+{
+    printf("11b - entrando em estado de espera.\n");
+    while(controle)
+        sleep(1);
+    controle = 1;
+}
+
+void sinal(void) /*funcao para mexer com o sinal*/
+{
+    controle = 0;
+    signal(SIGUSR1, (void *) sinal);
+}
