@@ -14,7 +14,8 @@ typedef struct jogoant /*struct para auxiliar a IA*/
 {
     char ant[tamsenha];
     char resultant[tamsenha];
-    int nb, np, a, b, jogocerteza[tamsenha] = {0}, jogada;
+    int nb, np, a, b, jogada, jogocerteza[tamsenha];
+    
 }jogoant;
 
 void espera(void);
@@ -29,7 +30,7 @@ int main(void)
     key_t chave;
     int mcid;
     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
-    int pid_11b, cont=0, nb, np, senhac[tamsenha];
+    int pid_11a, cont=0, nb, np, senhac[tamsenha];
     if((chave = ftok("senha.c", (int)rand()%256)) == -1)
     {
         printf("11b - Erro na geracao da chave.\n");
@@ -105,7 +106,7 @@ void inverte_posicao(char senha[tamsenha], int a, int b) /*funcao para inverter 
     senha[b] = aux;
 }
 
-int brancos(char senha[tamsenha], char tenta[tamsenha]) /*Funcao para contar a quantidade de brancos*/
+int brancos(char senha[tamsenha]) /*Funcao para contar a quantidade de brancos*/
 {
     int i = 0, cont = 0;
     for(; i<tamsenha-1; i++)

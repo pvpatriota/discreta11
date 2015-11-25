@@ -1,0 +1,22 @@
+ex11b.c: In function ‘main’:
+ex11b.c:33:34: warning: unused variable ‘senhac’ [-Wunused-variable]
+     int pid_11a, cont=0, nb, np, senhac[tamsenha];
+                                  ^
+ex11b.c:33:30: warning: unused variable ‘np’ [-Wunused-variable]
+     int pid_11a, cont=0, nb, np, senhac[tamsenha];
+                              ^
+ex11b.c:33:26: warning: unused variable ‘nb’ [-Wunused-variable]
+     int pid_11a, cont=0, nb, np, senhac[tamsenha];
+                          ^
+ex11b.c:33:18: warning: unused variable ‘cont’ [-Wunused-variable]
+     int pid_11a, cont=0, nb, np, senhac[tamsenha];
+                  ^
+ex11b.c:32:48: warning: unused variable ‘senha’ [-Wunused-variable]
+     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
+                                                ^
+ex11b.c:32:36: warning: variable ‘pmr’ set but not used [-Wunused-but-set-variable]
+     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
+                                    ^
+ex11b.c:32:23: warning: variable ‘pmp’ set but not used [-Wunused-but-set-variable]
+     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
+                       ^
