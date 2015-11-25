@@ -24,14 +24,19 @@ void troca_cor(char senha[tamsenha], int a);
 void inverte_posicao(char senha[tamsenha], int a, int b);
 int brancos(char senha[tamsenha]);
 int pretos(char senha[tamsenha]);
-void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1);
+void deduzindo(char pmp[tamsenha], char pmr[tamsenha], struct jogoant m1);
 
 int main(void)
 {
+    jogoant m1;
+    m1.ant = m1.resultant = {'\0'};
+    m1.jogocerteza = {0};
+    m1.nb = m1.np = m1.a = m1.b = 0;
+
     key_t chave;
     int mcid;
-    char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
-    int pid_11a, cont=0, nb, np, senhac[tamsenha];
+    char *mc = NULL, *pmp = NULL, *pmr = NULL;
+    int pid_11a, cont=0;
     if((chave = ftok("senha.c", (int)rand()%256)) == -1)
     {
         printf("11b - Erro na geracao da chave.\n");
@@ -61,8 +66,10 @@ int main(void)
     {
         kill(pid_11a, SIGUSR1);
         espera();
+        deduzindo(pmp, pmr, m1);
+        cont++;
     }
-    kill(pid_11b, SIGUSR1);
+    kill(pid_11a, SIGUSR1);
     if(strcmp(pmr, "BBBB"))
         printf("11b - Consegui!!!\n");
     else
@@ -136,8 +143,9 @@ int pretos(char senha[tamsenha]) /*Funcao para contar a quantidade de pretos*/
     return cont;
 }
 
-void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1)
+void deduzindo(char pmp[tamsenha],char pmr[tamsenha], struct jogoant m1)
 {
+    char senha[tamsenha] = pmp;
     int aux;
     m1.nb = brancos(m1.ant);
     m1.np = pretos(m1.ant);
@@ -184,7 +192,7 @@ void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1)
                     while(m1.a == m1.b && m1.jogocerteza[m1.a])
                         m1.a = rand()%4;
                     m1.b = m1.a;
-                    troca_cor(senha, m1.a)
+                    troca_cor(senha, m1.a);
                 }
                 else
                 {
@@ -277,6 +285,6 @@ void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1)
     }
     else
         senha = "RGBY";
-    m1.ant = senha;
+    m1.ant = pmp = senha;
     m1.resultant = pmr;
 }

@@ -1,52 +1,42 @@
 ex11b.c: In function ‘main’:
-ex11b.c:65:10: error: ‘pid_11b’ undeclared (first use in this function)
-     kill(pid_11b, SIGUSR1);
-          ^
-ex11b.c:65:10: note: each undeclared identifier is reported only once for each function it appears in
-ex11b.c:34:34: warning: unused variable ‘senhac’ [-Wunused-variable]
-     int pid_11a, cont=0, nb, np, senhac[tamsenha];
-                                  ^
-ex11b.c:34:30: warning: unused variable ‘np’ [-Wunused-variable]
-     int pid_11a, cont=0, nb, np, senhac[tamsenha];
-                              ^
-ex11b.c:34:26: warning: unused variable ‘nb’ [-Wunused-variable]
-     int pid_11a, cont=0, nb, np, senhac[tamsenha];
-                          ^
-ex11b.c:33:48: warning: unused variable ‘senha’ [-Wunused-variable]
-     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
-                                                ^
-ex11b.c:33:23: warning: variable ‘pmp’ set but not used [-Wunused-but-set-variable]
-     char *mc = NULL, *pmp = NULL, *pmr = NULL, senha[tamsenha];
-                       ^
+ex11b.c:32:29: error: expected expression before ‘{’ token
+     m1.ant = m1.resultant = {'\0'};
+                             ^
+ex11b.c:33:22: error: expected expression before ‘{’ token
+     m1.jogocerteza = {0};
+                      ^
 ex11b.c: In function ‘deduzindo’:
-ex11b.c:146:28: error: ‘pmr’ undeclared (first use in this function)
-         if(m1.nb > brancos(pmr))
-                            ^
-ex11b.c:165:21: error: expected ‘}’ before ‘else’
+ex11b.c:148:5: error: invalid initializer
+     char senha[tamsenha] = pmp;
+     ^
+ex11b.c:173:21: error: expected ‘}’ before ‘else’
                      else
                      ^
-ex11b.c:188:17: error: expected ‘;’ before ‘}’ token
+ex11b.c:208:23: error: assignment to expression with array type
+                 senha = m1.ant;
+                       ^
+ex11b.c:224:23: error: assignment to expression with array type
+                 senha = m1.ant;
+                       ^
+ex11b.c:256:17: error: expected ‘;’ before ‘}’ token
                  }
                  ^
-ex11b.c:248:17: error: expected ‘;’ before ‘}’ token
-                 }
-                 ^
-ex11b.c:141:9: warning: unused variable ‘aux’ [-Wunused-variable]
+ex11b.c:266:27: error: assignment to expression with array type
+                     senha = m1.ant;
+                           ^
+ex11b.c:149:9: warning: unused variable ‘aux’ [-Wunused-variable]
      int aux;
          ^
-ex11b.c:139:43: warning: unused parameter ‘result’ [-Wunused-parameter]
- void deduzindo(char senha[tamsenha], char result[tamsenha], struct jogoant m1)
-                                           ^
 ex11b.c: At top level:
-ex11b.c:278:5: error: expected identifier or ‘(’ before ‘else’
+ex11b.c:286:5: error: expected identifier or ‘(’ before ‘else’
      else
      ^
-ex11b.c:280:7: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘.’ token
-     m1.ant = senha;
+ex11b.c:288:7: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘.’ token
+     m1.ant = pmp = senha;
        ^
-ex11b.c:281:7: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘.’ token
+ex11b.c:289:7: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘.’ token
      m1.resultant = pmr;
        ^
-ex11b.c:282:1: error: expected identifier or ‘(’ before ‘}’ token
+ex11b.c:290:1: error: expected identifier or ‘(’ before ‘}’ token
  }
  ^
