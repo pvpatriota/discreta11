@@ -37,7 +37,7 @@ int main(void)
         printf("11b - Erro na geracao da chave.\n");
         exit(1);
     }
-    if((mcid = shmget(chave, 2*(tamsenha)*sizeof(char), 0700 | IPC_CREAT)) == -1) /*da 33 a 47 ta criando a memoria dividida*/
+    if((mcid = shmget(chave, 2*(tamsenha)*sizeof(char), 0700 | IPC_CREAT)) == -1)
     {
         printf("11b - Erro no alocamento de memoria.\n");
         exit(1);
@@ -49,13 +49,24 @@ int main(void)
     }
 
     pmp = mc;
-    pmr = mc + tamsenha; /*definindo ponteiros para a memoria dividida*/
+    pmr = mc + tamsenha;
 
     srand(time(NULL));
 
     printf("Digite o ID do processo do ex11a.x");
-    scanf("%d", &pid_11a); /*ID do primeiro programa*/
-    signal(SIGUSR1, (void *) sinal); /*preparando para receber o sinal*/
+    scanf("%d", &pid_11a);
+    signal(SIGUSR1, (void *) sinal);
+
+    while(strcmp(pmr, "BBBB") && cont<15)
+    {
+        kill(pid_11a, SIGUSR1);
+        espera();
+    }
+    kill(pid_11b, SIGUSR1);
+    if(strcmp(pmr, "BBBB"))
+        printf("11b - Consegui!!!\n");
+    else
+        printf("11b - Nao foi dessa vez, na proxima vou me esforcar mais.\n");
 
     return 0;
 }
