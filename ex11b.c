@@ -71,3 +71,29 @@ void sinal(void) /*funcao para mexer com o sinal*/
     controle = 0;
     signal(SIGUSR1, (void *) sinal);
 }
+
+void troca_cor(char senha[tamsenha], int a) /*funcao para trocar a cor de uma posicao*/
+{
+    int aux1=0;
+    char aux2;
+    while(aux1)
+    {
+        switch(rand()%4)
+        {
+            case 0:
+                aux2 = 'R';
+                break;
+            case 1:
+                aux2 = 'G';
+                break;
+            case 2:
+                aux2 = 'Y';
+                break;
+            case 3:
+                aux2 = 'B';
+                break;
+        }
+        if(aux2 != senha[a])
+            aux1 = 1;
+    }
+}
