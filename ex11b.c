@@ -17,4 +17,9 @@ typedef struct jogoant /*struct para auxiliar a IA*/
     int nb, np, a, b, jogocerteza[tamsenha] = {0}, jogada;
 }jogoant;
 
-
+void espera(void);
+void sinal(void);
+void troca_cor(char senha[tamsenha], int a);
+void inverte_posicao(char senha[tamsenha], int a, int b);
+int brancos(char senha[tamsenha]);
+int pretos(char senha[tamsenha]);
