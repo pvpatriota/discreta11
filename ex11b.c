@@ -97,3 +97,28 @@ void troca_cor(char senha[tamsenha], int a) /*funcao para trocar a cor de uma po
             aux1 = 1;
     }
 }
+
+void inverte_posicao(char senha[tamsenha], int a, int b) /*funcao para inverter a posicao de duas cores*/
+{
+    char aux = senha[a];
+    senha[a] = senha[b];
+    senha[b] = aux;
+}
+
+int brancos(char senha[tamsenha], char tenta[tamsenha]) /*Funcao para contar a quantidade de brancos*/
+{
+    int i = 0, cont = 0;
+    for(; i<tamsenha-1; i++)
+        if(senha[i] == 'B')
+            cont++;
+    return cont;
+}
+
+int pretos(char senha[tamsenha]) /*Funcao para contar a quantidade de pretos*/
+{
+    int i=0, cont=0;
+    for(; i<tamsenha-1; i++)
+        if(senha[i] == 'B')
+            cont++;
+    return cont;
+}
